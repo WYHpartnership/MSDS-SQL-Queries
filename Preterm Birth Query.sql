@@ -1,8 +1,10 @@
+--This query identifies preterm births based on gestation at birth and calculates preterm birth rates per month per Trust
+
 --PRETERM BIRTHS ONLY -CTE
 WITH PretermBirths AS (
 SELECT MSD000.OrgCodeProvider, 
-year(MSD401.[REPORTING PERIOD START DATE]) as Years,
-month(MSD401.[REPORTING PERIOD START DATE]) as Months,
+year(MSD401.[REPORTING PERIOD START DATE]) AS Years,
+month(MSD401.[REPORTING PERIOD START DATE]) AS Months,
 count (DISTINCT MSD401.Person_ID_Mother) AS Preterm
 FROM  [msds].[MSD401BabyDemographics] MSD401 
 INNER JOIN  [msds].[MSD000Header] MSD000 ON MSD401.OrgCodeProvider = MSD000.OrgCodeProvider-- AND MSD000.RPEndDate = '{RPEnd}' AND MSD401.RPStartDate BETWEEN '{start}' AND '{end}' 
@@ -24,8 +26,8 @@ Preterm,
 FROM (
 --ALL BIRTHS
 SELECT MSD000.OrgCodeProvider, 
-year(MSD401.[REPORTING PERIOD START DATE]) as Years,
-month(MSD401.[REPORTING PERIOD START DATE]) as Months,
+year(MSD401.[REPORTING PERIOD START DATE]) AS Years,
+month(MSD401.[REPORTING PERIOD START DATE]) AS Months,
 count (DISTINCT MSD401.Person_ID_Mother) AS AllBirths
 
 FROM  [msds].[MSD401BabyDemographics] MSD401 
